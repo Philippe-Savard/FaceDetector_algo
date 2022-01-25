@@ -25,10 +25,10 @@ class FaceDetector:
         try:
             
             self.landmarks = []
-            self.scale = 0
+            self.scale = 0 # Scale in cm / 
             
-            self.leftEyeWidth = 0
-            self.rightEyeWidth = 0
+            self.leftEyeWidth = 2.5
+            self.rightEyeWidth = 2.5
             
             # DLIB FACE DETECTOR AND KEYPOINTS PREDICTOR
             self.detector = dlib.get_frontal_face_detector()
@@ -69,13 +69,11 @@ class FaceDetector:
                 for (i, face) in enumerate(faces):
     
                     # Finding the facial landmarks
-                    landmarks = self.predictor(grayImage, face)
+                    self.landmarks = self.predictor(grayImage, face)
     
                     # Converts the landmarks into a 2D numpy array of x, y coordinnates
-                    landmarks = face_utils.shape_to_np(landmarks)
+                    self.landmarks = face_utils.shape_to_np(self.landmarks)
                 
-                # Returns the first face
-                return landmarks[0]
         except:
             print("Damn, that sucks part 2")
             # some error code
