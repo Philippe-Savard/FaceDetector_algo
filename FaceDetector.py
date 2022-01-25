@@ -77,3 +77,24 @@ class FaceDetector:
         except:
             print("Damn, that sucks part 2")
             # some error code
+    
+    def getDistance(self, point1, point2):
+        """
+            This method return the approximate distance in cm between two landmarks.
+            
+            Parameters
+            ----------
+            point1 : number
+                Represents the reference number of the first landmark
+                
+            point2 : number
+                Represents the reference number of the second landmark
+            
+            Returns
+            -------
+            Returns the approximate distance between two landmarks
+        """
+        dx = pow(self.landmarks[point2][0] - self.landmarks[point1][0], 2)
+        dy = pow(self.landmarks[point2][1] - self.landmarks[point1][1], 2)
+        
+        return np.sqrt(dx + dy)
