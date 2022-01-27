@@ -13,22 +13,44 @@ from imutils import face_utils
 import dlib
 from os import path
 
-
 class FaceDetector:
-    
+    """
+        FaceDetector contains the necessary 
+    """
     # Find the predictor on the dlib official website: http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2 
     PREDICTOR_PATH = "shape_predictor_68_face_landmarks.dat"
     
     AVERAGE_EYE_WIDTH = 3.0 # in cm
     
     def __init__(self, image=None, predictorPath = PREDICTOR_PATH):
+        """
+            Default constructor for the FaceDetector class
+            
+            Parameters
+            ----------
+            image : image
+                input image to be measured
+            
+            predictorPath : string
+                Path to the shape predictor used to find the landmarks on the image.
+        """
         try:
             
             self.landmarks = []
+            
             self.scale = 0 # Scale in cm / 
             
-            self.leftEyeWidth = 2.5
-            self.rightEyeWidth = 2.5
+            self.referenceRight = 2.9
+            self.referenceLeft = 2.591
+            
+            self.rightEye = 0
+            self.leftEye = 0
+            
+            self.rightNostril = 0
+            self.leftNostril = 0
+            self.nose = 0
+            
+            self.foreheadChin = 0
             
             # DLIB FACE DETECTOR AND KEYPOINTS PREDICTOR
             self.detector = dlib.get_frontal_face_detector()
